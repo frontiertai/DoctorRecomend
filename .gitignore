@@ -38,3 +38,5 @@ next-env.d.ts
 
 #.gitignore
 .env
+
+/Users/frontier_tai/Desktop/Nextjs/DoctorRecomend/firebase.ts
