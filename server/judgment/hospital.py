@@ -111,11 +111,12 @@ def save_recommendation_to_firestore(result, input_data, yolo_result_path, times
             'YOLO_Result_Path': yolo_result_path,
             'Time_Stamp': timestamp
         }
-
+        
+        print(f"Data to save: {data}", file=sys.stderr)
         serializable_data = convert_to_serializable(data)
         print(f"Saving data to Firestore: {serializable_data}", file=sys.stderr)
         message_collection_ref.add(serializable_data)
-        
+        print(json.dumps({"success": "Data saved to Firestore", "data": serializable_data}))
     except Exception as e:
         print(f"Error saving recommendation to Firestore: {e}", file=sys.stderr)
 

@@ -51,7 +51,8 @@ const Judge = () => {
       const queryParams = new URLSearchParams({ diagnosisResult: JSON.stringify(result) }).toString();
       router.push(`/auth/Result?${queryParams}`);
     } else {
-      console.error("Error executing Python script");
+      const errorText = await response.text();  // 追加
+      console.error("Error executing Python script:", errorText); 
     }
   };
 

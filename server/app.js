@@ -92,9 +92,12 @@ app.post('/api/run-python', (req, res) => {
         const result = JSON.parse(stdoutData);
         res.json(result);
       } catch (error) {
+        console.error("Error parsing JSON response:", error);
+        nsole.error("Raw response:", stdoutData);
         res.status(500).send("Error parsing JSON response");
       }
     } else {
+      console.error("Python script error",stderrData);
       res.status(500).send(stderrData);
     }
   });
