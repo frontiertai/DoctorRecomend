@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation"; // useRouterの使用
 import Parts from "../featurs/InputFied/parts";
 
 const Judge = () => {
-  const { selectedRoom } = useAppContext();  //ルーム選択の際、ユーザ情報を参照する
+  const { selectedRoom,selectRoomName } = useAppContext();  //ルーム選択の際、ユーザ情報を参照する
   const [selectedAge, setSelectedAge] = useState<number>(0);
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [parts, setParts] = useState<string>("");
@@ -24,6 +24,12 @@ const Judge = () => {
 
   const sendMessage = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    //selectedRoomがnullの場合は処理を中断
+    if (!selectedRoom){
+      console.error("No room selected");
+      return;
+    }
     const messageData = {
       Age: selectedAge,
       Location: selectedLocation,
@@ -32,7 +38,7 @@ const Judge = () => {
       timestamp: Timestamp.now(),
     };
 
-    const roomDocRef = doc(db, "rooms", "PeGTHlBbhMJC2wIRtzfM");
+    const roomDocRef = doc(db, "rooms", selectedRoom);
     const messageCollectionRef = collection(roomDocRef, "Input");
     await addDoc(messageCollectionRef, messageData);
     console.log("Data sent to Firestore:", messageData);
@@ -68,7 +74,7 @@ const Judge = () => {
 
   return (
     <div className="bg-white h-full p-4 flex flex-col">
-      <h1 className="text-2xl font-semibold mb-1">Room1</h1>
+      <h1 className="text-2xl font-semibold mb-1">{selectRoomName}</h1>
       <div className="max-w-sm-auto mt-36">
         <form onSubmit={sendMessage}>
           <h2 className="text-center mb-5 text-2xl font-medium">

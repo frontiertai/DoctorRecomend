@@ -2,9 +2,16 @@
 import React from 'react';
 import useLatestDiagnosisResult from '@/app/component/hooks/useLatsetDiagnosisResult/page';
 import useInput from '@/app/component/hooks/useLatestInput/page';
+import { useAppContext } from '@/app/context/Appcontext';
 
 const Result = () => {
-  const roomId = 'PeGTHlBbhMJC2wIRtzfM'; // 固定のルームIDを使用
+  const { selectedRoom} = useAppContext();
+
+  if(!selectedRoom){
+    return
+  }
+  
+  const roomId = selectedRoom; // 固定のルームIDを使用
   const { latestResult, loading, error } = useLatestDiagnosisResult(roomId);
   const{latestInput}=useInput(roomId);
 
@@ -30,14 +37,14 @@ const Result = () => {
           <h2 className="text-xl font-medium text-blue-700">医師名: {latestResult.Doctor_Name}</h2>
           <h2 className="text-xl font-medium text-blue-700">専門: {latestResult.Specialty}</h2>
           <h2 className="text-xl font-medium text-blue-700">専門レベル: {latestResult.Expertise_Level}</h2>
-          {latestResult.YOLO_Result_Path && (
+          
             <>
               <h2 className="text-xl font-medium text-blue-700 mt-4">YOLO解析結果:</h2>
-              <img src={`http://localhost:3000/uploads/new/latest_result.jpg`} alt="YOLO解析結果" className="mt-2"/>
+              <img src={`/server/uploads/new/latest_result.jpg`} alt="YOLO解析結果" className="mt-2"/>
             </>
-          )}
         </div>
       </div>
+      
       
       
 
