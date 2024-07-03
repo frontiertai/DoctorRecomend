@@ -39,4 +39,4 @@ next-env.d.ts
 #.gitignore
 .env
 firebase.ts
-server/doctorrecomend-firebase-adminsdk-sth3q-7dd1e5316a.json
+/server/doctorrecomend-firebase-adminsdk-sth3q-7dd1e5316a.json
