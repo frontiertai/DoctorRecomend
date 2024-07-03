@@ -22,6 +22,12 @@ const Judge = () => {
   );
   const router = useRouter(); 
 
+  useEffect(()=>{
+    if(selectRoomName){
+
+    }
+  },[selectedRoom]);
+
   const sendMessage = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -42,6 +48,7 @@ const Judge = () => {
     const messageCollectionRef = collection(roomDocRef, "Input");
     await addDoc(messageCollectionRef, messageData);
     console.log("Data sent to Firestore:", messageData);
+  
 
     // Pythonスクリプトを呼び出す
     const response = await fetch("http://localhost:3000/api/run-python", {
@@ -51,7 +58,7 @@ const Judge = () => {
       },
       body: JSON.stringify(messageData),
     });
-
+   
     if (response.ok) {
       const result = await response.json();
       const queryParams = new URLSearchParams({ diagnosisResult: JSON.stringify(result) }).toString();
@@ -60,6 +67,7 @@ const Judge = () => {
       const errorText = await response.text();  // 追加
       console.error("Error executing Python script:", errorText); 
     }
+
   };
 
   const handleSelectAge = (age: number) => setSelectedAge(age); 
@@ -71,6 +79,7 @@ const Judge = () => {
   const handleRecognitionResult = (result: number) => {
     setRecognitionResult(result);
   };
+ 
 
   return (
     <div className="bg-white h-full p-4 flex flex-col">
