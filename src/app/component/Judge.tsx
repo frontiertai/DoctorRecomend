@@ -22,20 +22,22 @@ const Judge = () => {
   );
   const router = useRouter(); 
 
-  useEffect(()=>{
+  
+//room毎に診断結果わかるようにする
+  /*useEffect(()=>{
     if(selectRoomName){
 
     }
-  },[selectedRoom]);
+  },[selectedRoom]);*/
 
   const sendMessage = async (event: React.FormEvent) => {
     event.preventDefault();
 
     //selectedRoomがnullの場合は処理を中断
-    if (!selectedRoom){
+    /*if (!selectedRoom){
       console.error("No room selected");
       return;
-    }
+    }*/
     const messageData = {
       Age: selectedAge,
       Location: selectedLocation,
@@ -44,7 +46,7 @@ const Judge = () => {
       timestamp: Timestamp.now(),
     };
 
-    const roomDocRef = doc(db, "rooms", selectedRoom);
+    const roomDocRef = doc(db, "rooms", "PeGTHlBbhMJC2wIRtzfM");  //room毎に診断結果わかるようにする
     const messageCollectionRef = collection(roomDocRef, "Input");
     await addDoc(messageCollectionRef, messageData);
     console.log("Data sent to Firestore:", messageData);

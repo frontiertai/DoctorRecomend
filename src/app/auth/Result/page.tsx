@@ -5,15 +5,15 @@ import useInput from '@/app/component/hooks/useLatestInput/page';
 import { useAppContext } from '@/app/context/Appcontext';
 
 const Result = () => {
-  const { selectedRoom} = useAppContext();
+  //const { selectedRoom} = useAppContext();
 
-  if(!selectedRoom){
+  /*if(!selectedRoom){
     return
-  }
+  }*/
   
-  const roomId = selectedRoom; // 固定のルームIDを使用
-  const { latestResult, loading, error } = useLatestDiagnosisResult(roomId);
-  const{latestInput}=useInput(roomId);
+  //const roomId = selectedRoom; // 固定のルームIDを使用
+  const { latestResult, loading, error } = useLatestDiagnosisResult("PeGTHlBbhMJC2wIRtzfM");
+  const{latestInput}=useInput("PeGTHlBbhMJC2wIRtzfM");
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;

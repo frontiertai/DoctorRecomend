@@ -12,7 +12,7 @@ const useInput = (roomId: string) => {
     const fetchLatestInput = async () => {
       try {
         const q = query(
-          collection(db, 'rooms', roomId, 'Input'),
+          collection(db, 'rooms', "PeGTHlBbhMJC2wIRtzfM", 'Input'),
           orderBy('Time_Stamp', 'desc'),
           limit(1)
         );
